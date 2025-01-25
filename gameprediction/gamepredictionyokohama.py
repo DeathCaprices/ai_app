@@ -13,10 +13,10 @@ st.write(f"横浜ネオフリーバーズと{opponent_name}の試合の予測を
 
 # ファイルをバックエンドに組み込み
 try:
-    yokohama_batting = pd.read_csv("old_data/homebattingdata.csv").round(3)
-    opponent_batting = pd.read_csv("old_data/opposingbattingdata.csv").round(3)
-    yokohama_pitching = pd.read_csv("old_data/homepitchingdata.csv").round(2)
-    opponent_pitching = pd.read_csv("old_data/)opposingpitchingdata.csv").round(2)
+    yokohama_batting = pd.read_csv("gameprediction/old_data/homebattingdata.csv").round(3)
+    opponent_batting = pd.read_csv("gameprediction/old_data/opposingbattingdata.csv").round(3)
+    yokohama_pitching = pd.read_csv("gameprediction/old_data/homepitchingdata.csv").round(2)
+    opponent_pitching = pd.read_csv("gameprediction/old_data/opposingpitchingdata.csv").round(2)
 except FileNotFoundError as e:
     st.error("必要なデータファイルが見つかりません。ファイルを確認してください。")
     st.stop()
