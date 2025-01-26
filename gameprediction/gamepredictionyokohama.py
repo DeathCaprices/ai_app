@@ -66,38 +66,8 @@ if uploaded_file3 is not None:
     # 小数点をすべて第2位まで丸める
     df3 = df3.round(2)
 
-
-        
-    
-    # 投球回数を 1/3 または 2/3 の分数形式に変換する関数
-    def to_fraction(value):
-        # 整数部分を取得
-        integer_part = int(value)
-        # 小数部分を取得
-        decimal_part = value - integer_part
-
-        # 小数部分を 1/3 または 2/3 に変換
-        if np.isclose(decimal_part, 0.33, atol=0.05):  # 小数部分が 0.33 に近い場合
-            fraction_part = "1/3"
-        elif np.isclose(decimal_part, 0.67, atol=0.05):  # 小数部分が 0.67 に近い場合
-            fraction_part = "2/3"
-        else:  # 小数部分が 0 またはそれ以外
-            fraction_part = ""
-
-        # 整数部分と分数部分を結合して返す
-        if fraction_part:
-            return f"{integer_part} {fraction_part}".strip()
-        else:
-            return str(integer_part)
-
-    # 投球回数のカラムを分数形式に変換
-    if '投球回' in df3.columns:
-        df3['投球回'] = df3['投球回'].apply(to_fraction)
-    
     st.markdown("##### 横浜ネオフリーバーズ投手データ")
     st.dataframe(df3)
-
-
 
 st.text(f"5.左のサイドバーから④{opponent_name}の投手データをアップロードして下さい。")
 
@@ -107,38 +77,10 @@ uploaded_file4 = st.sidebar.file_uploader(f"④{opponent_name}の投手データ
 if uploaded_file4 is not None:
     df4 = pd.read_csv(uploaded_file4)
     # 小数点をすべて第2位まで丸める
-    df4 = df4.round(2)
-
-    
-    # 投球回数を 1/3 または 2/3 の分数形式に変換する関数
-    def to_fraction(value):
-        # 整数部分を取得
-        integer_part = int(value)
-        # 小数部分を取得
-        decimal_part = value - integer_part
-
-        # 小数部分を 1/3 または 2/3 に変換
-        if np.isclose(decimal_part, 0.33, atol=0.05):  # 小数部分が 0.33 に近い場合
-            fraction_part = "1/3"
-        elif np.isclose(decimal_part, 0.67, atol=0.05):  # 小数部分が 0.67 に近い場合
-            fraction_part = "2/3"
-        else:  # 小数部分が 0 またはそれ以外
-            fraction_part = ""
-
-        # 整数部分と分数部分を結合して返す
-        if fraction_part:
-            return f"{integer_part} {fraction_part}".strip()
-        else:
-            return str(integer_part)
-
-    # 投球回数のカラムを分数形式に変換
-    if '投球回' in df4.columns:
-        df4['投球回'] = df4['投球回'].apply(to_fraction)
+    df4 = df4.round(2)  
        
     st.markdown(f"##### {opponent_name}投手データ")
     st.dataframe(df4)
-
-
 
     # 特徴量の作成
     # 例: 各チームの打撃データと投手データから特徴量を抽出
