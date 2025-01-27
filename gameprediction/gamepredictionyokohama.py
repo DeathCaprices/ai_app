@@ -100,19 +100,14 @@ model.fit(X, y)
 
 
 # 最新の試合データを仮の訓練データとして用意
+# GitHubのraw URLを設定
+GITHUB_URL = "https://raw.githubusercontent.com/yourusername/repositoryname/main/gameprediction/newdata_batting_pitcher/"
 
-# データファイルのパス
-DATA_DIR = "newdata_batting_pitcher/"
-FILE5_PATH = DATA_DIR + "new_homebattingdata.csv"
-FILE6_PATH = DATA_DIR + "new_opposingbattingdata.csv"
-FILE7_PATH = DATA_DIR + "new_homepitchingdata.csv"
-FILE8_PATH = DATA_DIR + "new_opposingpitchingdata.csv"
-
-# ファイルを読み込む
-df5 = pd.read_csv(FILE5_PATH)
-df6 = pd.read_csv(FILE6_PATH)
-df7 = pd.read_csv(FILE7_PATH)
-df8 = pd.read_csv(FILE8_PATH)
+# データファイルのURLを指定
+FILE5_URL = GITHUB_URL + "new_homebattingdata.csv"
+FILE6_URL = GITHUB_URL + "new_opposingbattingdata.csv"
+FILE7_URL = GITHUB_URL + "new_homepitchingdata.csv"
+FILE8_URL = GITHUB_URL + "new_opposingpitchingdata.csv"
 
 # 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
 new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
