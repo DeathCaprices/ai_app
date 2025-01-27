@@ -110,10 +110,10 @@ model.fit(X, y)
 #FILE8_URL = GITHUB_URL + "new_opposingpitchingdata.csv"
 
 
-FILE5_URL = "https://github.com/DeathCaprices/ai_app/tree/main/gameprediction/newdata_batting_pitcher/new_homebattingdata.csv"
-FILE6_URL = "https://github.com/DeathCaprices/ai_app/tree/main/gameprediction/newdata_batting_pitcher/new_opposingbattingdata.csv"
-FILE7_URL = "https://github.com/DeathCaprices/ai_app/tree/main/gameprediction/newdata_batting_pitcher/new_homepitchingdata.csv"
-FILE8_URL = "https://github.com/DeathCaprices/ai_app/tree/main/gameprediction/newdata_batting_pitcher/new_opposingpitchingdata.csv"
+FILE5_URL = "https://raw.githubusercontent.com/DeathCaprices/ai_app/refs/heads/main/gameprediction/newdata_batting_pitcher/new_homebattingdata.csv"
+FILE6_URL = "https://raw.githubusercontent.com/DeathCaprices/ai_app/refs/heads/main/gameprediction/newdata_batting_pitcher/new_opposingbattingdata.csv"
+FILE7_URL = "https://raw.githubusercontent.com/DeathCaprices/ai_app/refs/heads/main/gameprediction/newdata_batting_pitcher/new_homepitchingdata.csv"
+FILE8_URL = "https://raw.githubusercontent.com/DeathCaprices/ai_app/refs/heads/main/gameprediction/newdata_batting_pitcher/new_opposingpitchingdata.csv"
 
 # ファイルを直接URLから読み込む
 df5 = pd.read_csv(FILE5_URL)
