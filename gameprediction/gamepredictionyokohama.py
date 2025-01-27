@@ -109,6 +109,12 @@ FILE6_URL = GITHUB_URL + "new_opposingbattingdata.csv"
 FILE7_URL = GITHUB_URL + "new_homepitchingdata.csv"
 FILE8_URL = GITHUB_URL + "new_opposingpitchingdata.csv"
 
+# ファイルを直接URLから読み込む
+df5 = pd.read_csv(FILE5_URL)
+df6 = pd.read_csv(FILE6_URL)
+df7 = pd.read_csv(FILE7_URL)
+df8 = pd.read_csv(FILE8_URL)
+
 # 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
 new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
 new_opponent_features = np.array([df6["打率"].mean(), df6["本塁打"].mean(), df6["打点"].mean(), df8["防御率"].mean(), df8["三振"].mean(), df8["自責点"].mean()])
