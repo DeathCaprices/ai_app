@@ -100,18 +100,27 @@ model.fit(X, y)
 
 
 # 最新の試合データを仮の訓練データとして用意
-df5 = pd.read_csv("newdata_batting_pitcher/new_homebattingdata.csv")
-df6 = pd.read_csv("newdata_batting_pitcher/new_opposingbattingdata.csv")    
-df7 = pd.read_csv("newdata_batting_pitcher/new_homepitchingdata.csv")
-df8 = pd.read_csv("newdata_batting_pitcher/new_opposingpitchingdata.csv")
 
-# 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
-new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
-new_opponent_features = np.array([df6["打率"].mean(), df6["本塁打"].mean(), df6["打点"].mean(), df8["防御率"].mean(), df8["三振"].mean(), df8["自責点"].mean()])
+# データファイルのパス
+DATA_DIR = "newdata_batting_pitcher/"
+FILE5_PATH = DATA_DIR + "new_homebattingdata.csv"
+FILE6_PATH = DATA_DIR + "new_opposingbattingdata.csv"
+FILE7_PATH = DATA_DIR + "new_homepitchingdata.csv"
+FILE8_PATH = DATA_DIR + "new_opposingpitchingdata.csv"
 
-new_game_features = np.vstack([new_yokohama_features, new_opponent_features])
+# ファイルを読み込む
+try:
+    df5 = pd.read_csv(FILE5_PATH)
+    df6 = pd.read_csv(FILE6_PATH)
+    df7 = pd.read_csv(FILE7_PATH)
+    df8 = pd.read_csv(FILE8_PATH)
 
-prediction = model.predict(new_game_features) 
+    # 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
+    new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
+    new_opponent_features = np.array([df6["打率"].mean(), df6["本塁打"].mean(), df6["打点"].mean(), df8["防御率"].mean(), df8["三振"].mean(), df8["自責点"].mean()])
+
+    new_game_features = np.vstack([new_yokohama_features, new_opponent_features])
+    prediction = model.predict(new_game_features) 
 
 
 # 予測実施コメント
