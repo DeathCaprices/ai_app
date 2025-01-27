@@ -100,8 +100,8 @@ model.fit(X, y)
 
 
 # 最新の試合データを仮の訓練データとして用意
-# GitHubのraw URLを設定
-GITHUB_URL = "https://raw.githubusercontent.com/yourusername/repositoryname/main/gameprediction/newdata_batting_pitcher/"
+# GitHubのURLを設定
+GITHUB_URL = "https://github.com/DeathCaprices/ai_app/tree/main/gameprediction/newdata_batting_pitcher/"
 
 # データファイルのURLを指定
 FILE5_URL = GITHUB_URL + "new_homebattingdata.csv"
