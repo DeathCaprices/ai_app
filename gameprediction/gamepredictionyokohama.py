@@ -82,46 +82,46 @@ if uploaded_file4 is not None:
     st.markdown(f"##### {opponent_name}投手データ")
     st.dataframe(df4)
 
-    # 特徴量の作成
-    # 例: 各チームの打撃データと投手データから特徴量を抽出
-    old_yokohama_features = np.array([df1["打率"].mean(), df1["本塁打"].mean(), df1["打点"].mean(), df3["防御率"].mean(), df3["三振"].mean(), df3["自責点"].mean()])
-    old_opponent_features = np.array([df2["打率"].mean(), df2["本塁打"].mean(), df2["打点"].mean(), df4["防御率"].mean(), df4["三振"].mean(), df4["自責点"].mean()])
+# 特徴量の作成
+# 例: 各チームの打撃データと投手データから特徴量を抽出
+old_yokohama_features = np.array([df1["打率"].mean(), df1["本塁打"].mean(), df1["打点"].mean(), df3["防御率"].mean(), df3["三振"].mean(), df3["自責点"].mean()])
+old_opponent_features = np.array([df2["打率"].mean(), df2["本塁打"].mean(), df2["打点"].mean(), df4["防御率"].mean(), df4["三振"].mean(), df4["自責点"].mean()])
 
-    # 過去の試合データを仮の訓練データとして用意
-    # 実際には事前に保存してある試合データをロード
-    X = np.vstack([old_yokohama_features, old_opponent_features])  # 特徴量
-    y = [1, 0]  # ラベル: 1 (横浜勝利), 0 (群馬勝利)
+# 過去の試合データを仮の訓練データとして用意
+# 実際には事前に保存してある試合データをロード
+X = np.vstack([old_yokohama_features, old_opponent_features])  # 特徴量
+y = [1, 0]  # ラベル: 1 (横浜勝利), 0 (群馬勝利)
     
-    # モデルの訓練
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    model = RandomForestClassifier()
-    model.fit(X, y)
+# モデルの訓練
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = RandomForestClassifier()
+model.fit(X, y)
     
 
 
-    # 最新の試合データを仮の訓練データとして用意
-    df5 = pd.read_csv("newdata_batting_pitcher/new_homebattingdata.csv")
-    df6 = pd.read_csv("newdata_batting_pitcher/new_opposingbattingdata.csv")    
-    df7 = pd.read_csv("newdata_batting_pitcher/new_homepitchingdata.csv")
-    df8 = pd.read_csv("newdata_batting_pitcher/new_opposingpitchingdata.csv")
+# 最新の試合データを仮の訓練データとして用意
+df5 = pd.read_csv("newdata_batting_pitcher/new_homebattingdata.csv")
+df6 = pd.read_csv("newdata_batting_pitcher/new_opposingbattingdata.csv")    
+df7 = pd.read_csv("newdata_batting_pitcher/new_homepitchingdata.csv")
+df8 = pd.read_csv("newdata_batting_pitcher/new_opposingpitchingdata.csv")
 
-    # 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
-    new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
-    new_opponent_features = np.array([df6["打率"].mean(), df6["本塁打"].mean(), df6["打点"].mean(), df8["防御率"].mean(), df8["三振"].mean(), df8["自責点"].mean()])
+# 最新のデータの各チームの新データの打撃データと投手データから特徴量を抽出
+new_yokohama_features = np.array([df5["打率"].mean(), df5["本塁打"].mean(), df5["打点"].mean(), df7["防御率"].mean(), df7["三振"].mean(), df7["自責点"].mean()])
+new_opponent_features = np.array([df6["打率"].mean(), df6["本塁打"].mean(), df6["打点"].mean(), df8["防御率"].mean(), df8["三振"].mean(), df8["自責点"].mean()])
 
-    new_game_features = np.vstack([new_yokohama_features, new_opponent_features])
+new_game_features = np.vstack([new_yokohama_features, new_opponent_features])
 
-    prediction = model.predict(new_game_features) 
+prediction = model.predict(new_game_features) 
 
 
-    # 予測実施コメント
-    st.text(f"{opponent_name}との試合結果を予測する場合は下のボタンを押して下さい。")
+# 予測実施コメント
+st.text(f"6.{opponent_name}との試合結果を予測する場合は下のボタンを押して下さい。")
 
         
-    # 結果を表示 st.markdownの場合は改行のため末尾(「{opponent_name}の勝利を予測しました！」の後に)にスペースを2つ入れてある
-    if st.button(f"{opponent_name}との試合結果を予測する"):
-        if prediction[0] == 1:
-            st.success("横浜ネオフリーバーズの勝利を予測しました！")
-        else:
-            st.markdown(f"""{opponent_name}の勝利を予測しました！      
-                    横浜ネオフリーバーズは、オーダーの組み換えや攻撃の方法、投手の起用法などを再検討して下さい。""")
+# 結果を表示 st.markdownの場合は改行のため末尾(「{opponent_name}の勝利を予測しました！」の後に)にスペースを2つ入れてある
+if st.button(f"{opponent_name}との試合結果を予測する"):
+    if prediction[0] == 1:
+        st.success("横浜ネオフリーバーズの勝利を予測しました！")
+    else:
+        st.markdown(f"""{opponent_name}の勝利を予測しました！        
+        横浜ネオフリーバーズは、オーダーの組み換えや攻撃の方法、投手の起用法などを再検討して下さい。""")
