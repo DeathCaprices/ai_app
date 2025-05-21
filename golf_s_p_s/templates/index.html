@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ショット予測シミュレーター</title>
+</head>
+<body>
+    <h2>ショット飛距離予測</h2>
+    <form method="post">
+        風速: <input type="number" step="0.1" name="wind" required><br>
+        傾斜: <input type="number" step="0.1" name="slope" required><br>
+        クラブ: 
+        <select name="club">
+            <option value="1">Driver</option>
+            <option value="2">Iron</option>
+            <option value="3">Putter</option>
+        </select><br><br>
+        <input type="submit" value="予測">
+    </form>
+    {% if prediction is not none %}
+        <h3>予測飛距離: {{ prediction | round(2) }} メートル</h3>
+    {% endif %}
+</body>
+</html>
