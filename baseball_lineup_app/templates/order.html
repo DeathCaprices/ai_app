@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>おすすめ打順</title>
+</head>
+<body>
+  <h1>おすすめの打順</h1>
+  <table border="1" cellpadding="5">
+    <tr>
+      <th>打順</th><th>選手名</th><th>打率</th><th>本塁打数</th><th>出塁率</th>
+    </tr>
+    {% for num, name, avg, hr, obp in batting_order %}
+    <tr>
+      <td>{{ num }}</td>
+      <td>{{ name }}</td>
+      <td>{{ avg }}</td>
+      <td>{{ hr }}</td>
+      <td>{{ obp }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <br>
+  <a href="{{ url_for('reset') }}"><button>最初からやり直す</button></a>
+</body>
+</html>

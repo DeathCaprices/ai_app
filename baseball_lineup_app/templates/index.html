@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>野球の打順決定アプリ</title>
+</head>
+<body>
+  <h1>選手の登録</h1>
+  <form method="POST" action="{{ url_for('add_player') }}">
+    名前: <input type="text" name="name" required><br>
+    打率: <input type="number" name="avg" step="0.001" required><br>
+    本塁打数: <input type="number" name="hr" required><br>
+    出塁率: <input type="number" name="obp" step="0.001" required><br><br>
+    <input type="submit" value="選手を追加">
+  </form>
+
+  {% if players %}
+    <h2>現在登録されている選手</h2>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>登録順</th><th>名前</th><th>打率</th><th>本塁打数</th><th>出塁率</th>
+      </tr>
+      {% for p in players %}
+      <tr>
+         <td>{{ loop.index }}</td>  <!-- 1始まり -->
+         <td>{{ p.name }}</td>
+         <td>{{ p.avg }}</td>
+         <td>{{ p.hr }}</td>
+         <td>{{ p.obp }}</td>
+      </tr>
+{% endfor %}
+
+    </table>
+
+    <br>
+    <a href="{{ url_for('decide_order') }}"><button>これで打順を決定する</button></a>
+    <a href="{{ url_for('reset') }}"><button>リセット</button></a>
+  {% endif %}
+</body>
+</html>
