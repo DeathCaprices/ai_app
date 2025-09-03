@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from fractions import Fraction
 import matplotlib.font_manager as fm
 import os
+import streamlit as st
 
 
 
@@ -190,13 +191,7 @@ BASE_DIR = os.path.dirname(__file__)
 font_path = os.path.join(BASE_DIR, "fonts", "NotoSansJP-Regular.ttf")
 
 
-# キャッシュ再構築
-import matplotlib
-matplotlib.font_manager._rebuild()
-
-
 font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()
 
 
 
@@ -220,10 +215,10 @@ with tabs[1]:
         ax[0].scatter(df1["三振"], df2["三振"], label="三振", color="pink")
         
         # 軸ラベルと凡例
-        ax[0].set_title("両チームの昨年の打撃データ")
-        ax[0].set_xlabel("群馬ニューフリーバーズ")
-        ax[0].set_ylabel(f"{opponent_name}")
-        ax[0].legend()
+        ax[0].set_title("両チームの昨年の打撃データ", fontproperties=font_prop)
+        ax[0].set_xlabel("群馬ニューフリーバーズ", fontproperties=font_prop)
+        ax[0].set_ylabel(f"{opponent_name}", fontproperties=font_prop)
+        ax[0].legend(prop=font_prop)
         
         
 
