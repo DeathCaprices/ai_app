@@ -186,7 +186,7 @@ with tabs[0]:  # 試合予測
 
 
 # フォントファイルを指定
-font_path = "fonts/NotoSansJP-Regular.ttf"
+font_path = "NotoSansJP-Regular.ttf"
 font_prop = fm.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = font_prop.get_name() 
 
