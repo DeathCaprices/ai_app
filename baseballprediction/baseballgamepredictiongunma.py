@@ -188,6 +188,13 @@ with tabs[0]:  # 試合予測
 
 BASE_DIR = os.path.dirname(__file__)
 font_path = os.path.join(BASE_DIR, "fonts", "NotoSansJP-Regular.ttf")
+
+
+# キャッシュ再構築
+import matplotlib
+matplotlib.font_manager._rebuild()
+
+
 font_prop = fm.FontProperties(fname=font_path)
 plt.rcParams['font.family'] = font_prop.get_name()
 
