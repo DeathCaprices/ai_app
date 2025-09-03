@@ -6,7 +6,20 @@ from sklearn import linear_model
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from fractions import Fraction
-import japanize_matplotlib
+import matplotlib.font_manager as fm
+
+
+# ==== 日本語フォント設定====
+jp_font = None
+for font in fm.findSystemFonts():
+    if "NotoSansCJK" in font or "NotoSansJP" in font:
+        jp_font = fm.FontProperties(fname=font)
+        break
+
+if jp_font:
+    plt.rcParams['font.family'] = jp_font.get_name()
+else:
+    plt.rcParams['font.family'] = 'sans-serif'
 
 
 
