@@ -6,8 +6,7 @@ from sklearn import linear_model
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from fractions import Fraction
-
-
+import japanize_matplotlib
 
 
 # ページのタイトル
