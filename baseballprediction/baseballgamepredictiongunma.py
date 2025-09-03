@@ -7,8 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from fractions import Fraction
 import matplotlib.font_manager as fm
-
-
+import os
 
 
 
@@ -186,9 +185,13 @@ with tabs[0]:  # 試合予測
 
 
 # フォントファイルを指定
-font_path = "NotoSansJP-Regular.ttf"
+
+BASE_DIR = os.path.dirname(__file__)
+font_path = os.path.join(BASE_DIR, "fonts", "NotoSansJP-Regular.ttf")
 font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name() 
+plt.rcParams['font.family'] = font_prop.get_name()
+
+
 
 
 # データ可視化タブの処理を限定
