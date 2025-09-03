@@ -6,6 +6,8 @@ from sklearn import linear_model
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from fractions import Fraction
+import matplotlib.font_manager as fm
+
 
 
 
@@ -183,9 +185,10 @@ with tabs[0]:  # 試合予測
                         群馬ニューフリーバーズは、オーダーの組み換えや攻撃の方法、投手の起用法などを再検討して下さい。""")
 
 
-
-# グラフのフォント指定
-plt.rcParams['font.family'] = 'MS Gothic'  # または 'Meiryo', 'Yu Gothic' 
+# フォントファイルを指定
+font_path = "fonts/NotoSansJP-Regular.ttf"
+font_prop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = font_prop.get_name() 
 
 
 # データ可視化タブの処理を限定
