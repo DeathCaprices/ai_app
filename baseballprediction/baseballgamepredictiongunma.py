@@ -357,11 +357,15 @@ with tabs[3]:  # 試合結果グラフ
 
             # 勝率を棒グラフで表示
             fig, ax = plt.subplots(figsize=(6, 4))
-            ax.bar(["群馬ニューフリーバーズ", opponent_name], [gunma_win_prob, opponent_win_prob], color=['blue', 'red'],fontproperties=font_prop)
+            ax.bar([0, 1], [gunma_win_prob, opponent_win_prob], color=['blue', 'red'])
+            ax.set_xticks([0, 1])
+            ax.set_xticklabels(["群馬ニューフリーバーズ", opponent_name], fontproperties=font_prop)
+
+            
             ax.set_ylabel("勝率",fontproperties=font_prop)
             ax.set_ylim(0, 1)  # 確率なので0～1の範囲にする
             ax.set_title("試合結果の予測（勝率）",fontproperties=font_prop)
-
+            
             st.pyplot(fig)
 
             # 予測結果のテキスト表示
