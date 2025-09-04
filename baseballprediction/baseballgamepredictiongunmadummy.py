@@ -6,7 +6,10 @@ from sklearn import linear_model
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from fractions import Fraction
-import japanize_matplotlib
+import matplotlib.font_manager as fm
+import os
+import streamlit as st
+
 
 
 # ページのタイトル
@@ -369,8 +372,13 @@ with tabs[0]:  # 試合予測
         
 
 
-# グラフのフォント指定
-plt.rcParams['font.family'] = 'MS Gothic'  # または 'Meiryo', 'Yu Gothic' 
+# フォントファイルを指定
+
+BASE_DIR = os.path.dirname(__file__)
+font_path = os.path.join(BASE_DIR, "fonts", "NotoSansJP-Regular.ttf")
+font_prop = fm.FontProperties(fname=font_path)
+
+
 
 
 # データ可視化タブの処理を限定
@@ -392,10 +400,11 @@ with tabs[1]:
         ax[0].scatter(df1["三振"], df2["三振"], label="三振", color="pink")
         
         # 軸ラベルと凡例
-        ax[0].set_title("両チームの昨年の打撃データ")
-        ax[0].set_xlabel("群馬ニューフリーバーズ")
-        ax[0].set_ylabel(f"{opponent_name}")
-        ax[0].legend()
+        ax[0].set_title("両チームの昨年の打撃データ", fontproperties=font_prop)
+        ax[0].set_xlabel("群馬ニューフリーバーズ", fontproperties=font_prop)
+        ax[0].set_ylabel(f"{opponent_name}", fontproperties=font_prop)
+        ax[0].legend(prop=font_prop)
+        
         
         
 
@@ -408,10 +417,10 @@ with tabs[1]:
         ax[1].scatter(df1["自責点"], df2["自責点"], label="自責点", color="brown")
         
         # 軸ラベルと凡例
-        ax[1].set_title("両チームの昨年の投手データ")
-        ax[1].set_xlabel("群馬ニューフリーバーズ")
-        ax[1].set_ylabel(f"{opponent_name}")
-        ax[1].legend()
+        ax[1].set_title("両チームの昨年の投手データ", fontproperties=font_prop)
+        ax[1].set_xlabel("群馬ニューフリーバーズ", fontproperties=font_prop)
+        ax[1].set_ylabel(f"{opponent_name}", fontproperties=font_prop)
+        ax[1].legend(prop=font_prop)
         # Streamlit に表示
         st.pyplot(fig)
 
@@ -433,10 +442,11 @@ with tabs[1]:
 
         # 軸とタイトル
         ax_bar.set_xticks(x)
-        ax_bar.set_xticklabels(teams)
-        ax_bar.set_ylabel("値")
-        ax_bar.set_title("両チームの昨年の防御率と打率の比較")
-        ax_bar.legend()
+        ax_bar.set_xticklabels(teams,fontproperties=font_prop)
+        ax_bar.set_ylabel("値", fontproperties=font_prop)
+        ax_bar.set_title("両チームの昨年の防御率と打率の比較",fontproperties=font_prop)
+        ax_bar.legend(prop=font_prop)
+
 
         
         # Streamlit に表示
@@ -466,10 +476,10 @@ with tabs[2]:  # 両チームの直近のデータ
         ax[0].scatter(df3["三振"].sum(), df4["三振"].sum(), label="三振", color="pink")
         
         # 軸ラベルと凡例
-        ax[0].set_title("両チームの直近の打撃データ")
-        ax[0].set_xlabel("群馬ニューフリーバーズ")
-        ax[0].set_ylabel(f"{opponent_name}")
-        ax[0].legend()
+        ax[0].set_title("両チームの直近の打撃データ",fontproperties=font_prop)
+        ax[0].set_xlabel("群馬ニューフリーバーズ",fontproperties=font_prop)
+        ax[0].set_ylabel(f"{opponent_name}",fontproperties=font_prop)
+        ax[0].legend(prop=font_prop)
         
         
 
@@ -482,10 +492,10 @@ with tabs[2]:  # 両チームの直近のデータ
         ax[1].scatter(df5["自責点"].sum(), df6["自責点"].sum(), label="自責点", color="brown")
         
         # 軸ラベルと凡例
-        ax[1].set_title("両チームの直近の投手データ")
-        ax[1].set_xlabel("群馬ニューフリーバーズ")
-        ax[1].set_ylabel(f"{opponent_name}")
-        ax[1].legend()
+        ax[1].set_title("両チームの直近の投手データ",fontproperties=font_prop)
+        ax[1].set_xlabel("群馬ニューフリーバーズ",fontproperties=font_prop)
+        ax[1].set_ylabel(f"{opponent_name}",fontproperties=font_prop)
+        ax[1].legend(prop=font_prop)
         # Streamlit に表示
         st.pyplot(fig)
 
@@ -507,10 +517,11 @@ with tabs[2]:  # 両チームの直近のデータ
 
         # 軸とタイトル
         ax_bar.set_xticks(x)
-        ax_bar.set_xticklabels(teams)
-        ax_bar.set_ylabel("値")
-        ax_bar.set_title("両チームの直近の防御率と打率の比較")
-        ax_bar.legend()
+        ax_bar.set_xticklabels(teams,fontproperties=font_prop)
+        ax_bar.set_ylabel("値",fontproperties=font_prop)
+        ax_bar.set_title("両チームの直近の防御率と打率の比較",fontproperties=font_prop)
+        ax_bar.legend(prop=font_prop)
+
 
         
         # Streamlit に表示
@@ -534,10 +545,14 @@ with tabs[3]:  # 試合結果グラフ
 
             # 勝率を棒グラフで表示
             fig, ax = plt.subplots(figsize=(6, 4))
-            ax.bar(["群馬ニューフリーバーズ", opponent_name], [gunma_win_prob, opponent_win_prob], color=['blue', 'red'])
-            ax.set_ylabel("勝率")
+            ax.bar([0, 1], [gunma_win_prob, opponent_win_prob], color=['blue', 'red'])
+            ax.set_xticks([0, 1])
+            ax.set_xticklabels(["群馬ニューフリーバーズ", opponent_name], fontproperties=font_prop)
+
+            ax.set_ylabel("勝率",fontproperties=font_prop)
             ax.set_ylim(0, 1)  # 確率なので0～1の範囲にする
-            ax.set_title("試合結果の予測（勝率）")
+            ax.set_title("試合結果の予測（勝率）",fontproperties=font_prop)
+
 
             st.pyplot(fig)
 
