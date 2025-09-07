@@ -25,7 +25,7 @@ st.sidebar.write("""
 @st.cache_data
 def load_data():
     # 例: Kaggle Churn モデル用データ (csv を事前に同ディレクトリに置く)
-    df = pd.read_csv("Bank Churn/train.csv")
+    df = pd.read_csv("bank_churn/train.csv")
     return df
 
 df = load_data()
